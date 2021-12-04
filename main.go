@@ -15,7 +15,7 @@ func main() {
 	//第一引数にパスを指定する。
 	//第二引数に処理を指定する。
 	//curl http://localhost:8080/ で指定した処理が実行される
-	http.HandleFunc("/", hanlder)
+	http.HandleFunc("/countup", hanlder)
 
 	//curl http://localhost:8080/get で指定した処理が実行される
 	http.HandleFunc("/get", countHanlder)
@@ -46,5 +46,5 @@ func hanlder(w http.ResponseWriter, r *http.Request) {
 
 func countHanlder(w http.ResponseWriter, r *http.Request) {
 	//変数の値を表示している
-	fmt.Fprintln(w, count)
+	fmt.Fprintln(w, "<html><h1>Hello</h1></html>")
 }
