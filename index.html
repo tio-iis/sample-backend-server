@@ -1,8 +1,24 @@
+<html>
+    <button id="count-id">get count</button>
+    <button id="countup-id">countup</button>
 <script>
-    const req = new XMLHttpRequest()
-    req.addEventListener("load", () => {
-        console.log(this.responseText)
+    document.getElementById("count-id").addEventListener("click", () => {
+        const req = new XMLHttpRequest()
+        req.addEventListener("load", () => {
+            alert(req.responseText)
+        })
+        req.open("GET", "http://localhost:8080/get")
+        req.send()
     })
-    req.open("GET", "http://localhost:8080/get")
-    req.send()
+
+    document.getElementById("countup-id").addEventListener("click", () => {
+        const req = new XMLHttpRequest()
+        req.addEventListener("load", () => {
+            alert("countup!")
+        })
+        req.open("GET", "http://localhost:8080/countup")
+        req.send()
+    })
+
 </script>
+</html>
