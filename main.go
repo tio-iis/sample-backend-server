@@ -6,6 +6,7 @@ package main
 import (
 	"fmt"
 	"net/http"
+	"os"
 )
 
 // go run main.go を実行してmain()から処理が始まる
@@ -19,6 +20,8 @@ func main() {
 
 	//curl http://localhost:8080/get で指定した処理が実行される
 	http.HandleFunc("/get", countHanlder)
+
+	http.HandleFunc("/getindexhtml", getIndexHTML)
 
 	//サーバを立ち上げている
 	//ここで処理が止まる
@@ -39,12 +42,19 @@ func hanlder(w http.ResponseWriter, r *http.Request) {
 	//変数の値を +1 している
 	count++
 	fmt.Fprintln(w, count)
-
-	//helloを表示する
-	//fmt.Fprintln(w, "hello")
 }
 
 func countHanlder(w http.ResponseWriter, r *http.Request) {
 	//変数の値を表示している
-	fmt.Fprintln(w, "<html><h1>Hello</h1></html>")
+	fmt.Fprintln(w, count)
+}
+
+func getIndexHTML(w http.ResponseWriter, r *http.Request) {
+	data, err := os.ReadFile("index.html")
+	if err != nil {
+		fmt.Fprintln(w, "can't read the file")
+		return
+	}
+
+	fmt.Fprintln(w, string(data))
 }
